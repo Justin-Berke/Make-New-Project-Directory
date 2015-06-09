@@ -1,38 +1,47 @@
 '1) Create a directory with the format: YYYY-MM-DD - Description
 '2) Prompt user with option to create common subdirectories
 
-'Grab project name from user
-dim txtProjectName
-txtProjectName = InputBox ("Enter the name of the new project", "Make Project Directory")
+'Run the subroutine
+MakeProjectDirectory()
 
-'Generate & format date objects
-dim txtYear
-dim txtMonth
-dim txtDay
-txtYear = Year(Date())
-txtMonth = Month(Date())
-txtDay = Day(Date())
+Sub MakeProjectDirectory
+	'Grab project name from user
+	dim txtProjectName
+	txtProjectName = InputBox ("Enter the name of the new project", "Make Project Directory")
 
-If txtMonth < 10 Then txtMonth = "0" & txtMonth
-If txtDay < 10 Then txtDay = "0" & txtDay
+	'Exit if blank or cancelled
+	If txtProjectName = "" Then Exit Sub
 
-'Create file system object
-Dim oFSO
-Set oFSO = CreateObject("Scripting.FileSystemObject")
+	'Generate & format date objects
+	dim txtYear
+	dim txtMonth
+	dim txtDay
+	txtYear = Year(Date())
+	txtMonth = Month(Date())
+	txtDay = Day(Date())
 
-'Create folder path
-Dim path
-path = "C:\- Projects\" & _
-	txtYear & "-" & txtMonth & "-" & txtDay & " - " & txtProjectName
-	
-'Create main folder
-oFSO.CreateFolder(path)
+	If txtMonth < 10 Then txtMonth = "0" & txtMonth
+	If txtDay < 10 Then txtDay = "0" & txtDay
 
-'Prompt to create common subdirectories
-Dim boolAddSubdirectories
-boolAddSubdirectories = MsgBox("Do you want to add common subdirectories?", vbYesNo, "Add Subdirectories")
+	'Create file system object
+	Dim oFSO
+	Set oFSO = CreateObject("Scripting.FileSystemObject")
 
-If boolAddSubdirectories = vbYes Then
-	oFSO.CreateFolder(path & "\Exports")
-	' Add additional directories here...
-End If
+	'Create folder path
+	Dim path
+	path = "C:\- Projects\" & _
+		txtYear & "-" & txtMonth & "-" & txtDay & " - " & txtProjectName
+		
+	'Create main folder
+	oFSO.CreateFolder(path)
+
+	'Prompt to create common subdirectories
+	Dim boolAddSubdirectories
+	boolAddSubdirectories = MsgBox("Do you want to add common subdirectories?", vbYesNo, "Add Subdirectories")
+
+	If boolAddSubdirectories = vbYes Then
+		oFSO.CreateFolder(path & "\Exports")
+		' Add additional directories here...
+	End If
+
+End Sub
