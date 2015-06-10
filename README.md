@@ -6,3 +6,6 @@ Currently there are options using Python and VBScript. I'm keeping my eye open f
 
 
 Current format: "YYYY-MM-DD - Description"
+
+
+Discussion: http://justinberke.blogspot.com/2015/06/make-new-project-directory.html
